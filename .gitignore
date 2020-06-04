@@ -1,3 +1,5 @@
 /testing.csv
 /test-output.csv
 /*.swp
+/telegraf.log
+/telegraf.conf

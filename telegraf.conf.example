@@ -1,0 +1,29 @@
+## CSV import for telegraf
+## originally based on https://community.grafana.com/t/move-data-from-csv-to-influxdb/25424/3
+## see also https://www.influxdata.com/blog/how-to-write-points-from-csv-to-influxdb/
+[agent]
+  interval = '2s'
+  round_interval = true
+  precision = ''
+  logfile = 'telegraf.log'
+
+###############################################################################
+## OUTPUT PLUGINS
+###############################################################################
+
+# Configuration for sending metrics to InfluxDB
+[[outputs.influxdb]]
+  urls = ['http://192.168.1.2:8086']
+  database = 'hwinfo'
+
+###############################################################################
+## INPUT PLUGINS
+################################################################################
+
+[[inputs.file]]
+  files = ['test-output.csv']
+  data_format = 'csv'
+  csv_header_row_count = 1
+  csv_delimiter = ','
+  csv_timestamp_column = 'time'
+  csv_timestamp_format = '2006-01-02T15:04:05-07:00'
